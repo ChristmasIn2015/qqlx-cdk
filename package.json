@@ -1,0 +1,16 @@
+{
+    "name": "qqlx-cdk",
+    "version": "0.0.3",
+    "description": "qqlx client develop kit",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc --project ./tsconfig.json && npm publish"
+    },
+    "author": "huangwenqiang",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {
+        "typescript": "^5.0.2"
+    }
+}

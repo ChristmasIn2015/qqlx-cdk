@@ -1,23 +1,10 @@
-import { MongodbSort } from "./lib/enum.database";
-export { MongodbSort };
+export * from "./lib/enum.database";
+export * from "./lib/enum.time";
 
-import { TimeGap } from "./lib/enum.time";
-export { TimeGap };
+export * from "./lib/function.list";
+export * from "./lib/function.object";
+export * from "./lib/function.time";
 
-import { getPage } from "./lib/function.list";
-export { getPage };
-
-import { trimObject } from "./lib/function.object";
-export { trimObject };
-
-import { getRangeDay, getRangeWeek, getRangeMonth, getRangeYear } from "./lib/function.time";
-export { getRangeDay, getRangeWeek, getRangeMonth, getRangeYear };
-
-import { MongodbBase, Page, PageRes } from "./lib/type.database";
-export { MongodbBase, Page, PageRes };
-
-import { Response } from "./lib/type.rest";
-export { Response };
-
-import { Calculation } from "./lib/type.utils";
-export { Calculation };
+export * from "./lib/type.database";
+export * from "./lib/type.rest";
+export * from "./lib/type.utils";

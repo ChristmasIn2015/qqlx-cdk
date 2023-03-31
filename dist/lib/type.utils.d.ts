@@ -5,3 +5,9 @@ export type Calculation<T> = {
     count: number;
     amount: number;
 };
+export type EnumMapOption = {
+    value: number;
+    text: string;
+    text_en?: string;
+    tip?: string;
+};

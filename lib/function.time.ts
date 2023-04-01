@@ -1,3 +1,5 @@
+import { Page, PageRes } from "./type.database";
+
 /** 今天0点～今天午夜12点 */
 export function getRangeDay(): { startTime: number; endTime: number } {
     const today = new Date();

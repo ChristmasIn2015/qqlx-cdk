@@ -1,4 +1,6 @@
 /** 默认范围：第1页（限制20）今天0点～今天午夜12点 */
 import { Page, PageRes } from "./type.database";
-/** 获取分页基本参数 */
-export declare function getPage<T>(): Page & PageRes<T>;
+/** 默认本年0点～至今 */
+export declare function getPage(): Page;
+/** 默认本年0点～至今 */
+export declare function getPageRes<T>(): Page & PageRes<T>;

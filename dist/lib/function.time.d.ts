@@ -18,3 +18,12 @@ export declare function getRangeYear(): {
     startTime: number;
     endTime: number;
 };
+/** 获取从A-B时间，共有多少天时秒 */
+export declare function getTimeGap(big: number, small: number): string;
+/** 获取标准时间字符串 */
+export declare function getTime(mills: number): {
+    mills: number;
+    text: string;
+    text_full: string;
+};
+export declare function getChineseMoney(n: number): string;

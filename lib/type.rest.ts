@@ -1,7 +1,5 @@
 export type Response<T> = {
-    code: string;
+    code: number;
     data: T;
     message: string;
-    path: string;
-    time: number;
 };

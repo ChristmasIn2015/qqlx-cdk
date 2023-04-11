@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPageRes = exports.getPage = void 0;
 const function_time_1 = require("./function.time");
 /** 默认本年0点～至今 */
-function getPage() {
+function getPage(size = 20) {
     const range = (0, function_time_1.getRangeYear)();
     const page = {
         page: 1,
-        pageSize: 20,
+        pageSize: size,
         startTime: range.startTime,
         endTime: range.endTime,
     };

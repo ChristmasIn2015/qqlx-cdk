@@ -4,11 +4,11 @@ import { Page, PageRes } from "./type.database";
 import { getRangeYear } from "./function.time";
 
 /** 默认本年0点～至今 */
-export function getPage(): Page {
+export function getPage(size: number = 20): Page {
     const range = getRangeYear();
     const page = {
         page: 1,
-        pageSize: 20,
+        pageSize: size,
         startTime: range.startTime,
         endTime: range.endTime,
     };

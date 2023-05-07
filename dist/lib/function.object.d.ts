@@ -7,3 +7,4 @@ export declare function getMongodbBase(): {
     timeUpdate: number;
     timeUpdateString: string;
 };
+export declare function getChineseMoney(n: number): string;

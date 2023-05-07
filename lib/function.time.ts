@@ -23,8 +23,8 @@ export function getRangeWeek(): { startTime: number; endTime: number } {
     today.setSeconds(0);
     today.setMilliseconds(0);
 
-    const day = today.getDay(); // 今天是星期几
-    const monday = today.getTime() - (day - 1) * 86400000;
+    const day = today.getDay(); // 今天是星期几, 星期天是0
+    const monday = today.getTime() - ((day === 0 ? 7 : day) - 1) * 86400000;
     return {
         startTime: monday,
         endTime: Date.now() + 86400000,

@@ -26,4 +26,5 @@ export declare function getTime(mills: number): {
     text: string;
     text_full: string;
 };
-export declare function getChineseMoney(n: number): string;
+/** 仅用于查看函数耗时 */
+export declare function TimeLog(message: string): (target: Object | Function, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<any>) => TypedPropertyDescriptor<any>;

@@ -1,6 +1,15 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChineseMoney = exports.getTime = exports.getTimeGap = exports.getRangeYear = exports.getRangeMonth = exports.getRangeWeek = exports.getRangeDay = void 0;
+exports.TimeLog = exports.getTime = exports.getTimeGap = exports.getRangeYear = exports.getRangeMonth = exports.getRangeWeek = exports.getRangeDay = void 0;
 /** 今天0点～今天午夜12点 */
 function getRangeDay() {
     const today = new Date();
@@ -22,8 +31,8 @@ function getRangeWeek() {
     today.setMinutes(0);
     today.setSeconds(0);
     today.setMilliseconds(0);
-    const day = today.getDay(); // 今天是星期几
-    const monday = today.getTime() - (day - 1) * 86400000;
+    const day = today.getDay(); // 今天是星期几, 星期天是0
+    const monday = today.getTime() - ((day === 0 ? 7 : day) - 1) * 86400000;
     return {
         startTime: monday,
         endTime: Date.now() + 86400000,
@@ -82,34 +91,20 @@ function getTime(mills) {
     };
 }
 exports.getTime = getTime;
-// 网上复制的，获取中文金额
-function getChineseMoney(n) {
-    var fraction = ["角", "分"];
-    var digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
-    var unit = [
-        ["元", "万", "亿"],
-        ["", "拾", "佰", "仟"],
-    ];
-    var head = n < 0 ? "欠" : "";
-    n = Math.abs(n);
-    var s = "";
-    for (var i = 0; i < fraction.length; i++) {
-        s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, "");
-    }
-    s = s || "整";
-    n = Math.floor(n);
-    for (var i = 0; i < unit[0].length && n > 0; i++) {
-        var p = "";
-        for (var j = 0; j < unit[1].length && n > 0; j++) {
-            p = digit[n % 10] + unit[1][j] + p;
-            n = Math.floor(n / 10);
-        }
-        s = p.replace(/(零.)*零$/, "").replace(/^$/, "零") + unit[0][i] + s;
-    }
-    return (head +
-        s
-            .replace(/(零.)*零元/, "元")
-            .replace(/(零.)+/g, "零")
-            .replace(/^整$/, "零元整"));
+/** 仅用于查看函数耗时 */
+function TimeLog(message) {
+    return function (target, propertyKey, descriptor) {
+        const original = descriptor.value;
+        descriptor.value = function (...args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const start = Date.now();
+                const data = yield original.apply(this, args);
+                const gap = Date.now() - start;
+                console.log(message, gap, "\n");
+                return data;
+            });
+        };
+        return descriptor;
+    };
 }
-exports.getChineseMoney = getChineseMoney;
+exports.TimeLog = TimeLog;

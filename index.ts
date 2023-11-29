@@ -8,3 +8,5 @@ export * from "./lib/function.time";
 export * from "./lib/type.database";
 export * from "./lib/type.rest";
 export * from "./lib/type.utils";
+
+export * from "./lib/verify";

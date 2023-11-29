@@ -5,7 +5,11 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc --project ./tsconfig.json && npm publish"
+        "build": "tsc && git add . && git commit -m updates",
+        "commit": "npm run build && git push",
+        "patch": "npm run commit && npm version patch && git push && npm publish",
+        "minor": "npm run commit && npm version minor && git push && npm publish",
+        "major": "npm run commit && npm version major && git push && npm publish"
     },
     "author": "huangwenqiang",
     "license": "ISC",

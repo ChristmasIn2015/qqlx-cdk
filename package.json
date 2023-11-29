@@ -5,7 +5,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc && git add . && git commit -m updates",
+        "build": "yarn add qqlx-core && tsc && git add . && git commit -m updates",
         "commit": "npm run build && git push",
         "patch": "npm run commit && npm version patch && git push && npm publish",
         "minor": "npm run commit && npm version minor && git push && npm publish",
@@ -13,7 +13,9 @@
     },
     "author": "huangwenqiang",
     "license": "ISC",
-    "dependencies": {},
+    "dependencies": {
+        "qqlx-core": "^2.0.6"
+    },
     "devDependencies": {
         "typescript": "^5.0.2"
     }

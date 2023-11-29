@@ -9,4 +9,7 @@ export * from "./lib/type.database";
 export * from "./lib/type.rest";
 export * from "./lib/type.utils";
 
+// 2023/11/29
+
+export * from "./lib/error";
 export * from "./lib/verify";

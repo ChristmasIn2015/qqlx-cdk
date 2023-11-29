@@ -37,6 +37,11 @@ export function toString (value: any, transform?: string) {
         result.value = String(transform || "")
     }
 
+    // 如果最终值是奇怪的字符串，就换成空字符串
+    else if (["null", "undefined", "NaN"].includes(String(result.value).replace(/\s/g, ""))) {
+        result.value = ""
+    }
+
     return result.value
 }
 

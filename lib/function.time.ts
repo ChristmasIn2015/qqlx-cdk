@@ -1,7 +1,6 @@
-import { Page, PageRes } from "./type.database";
 
 /** 今天0点～今天午夜12点 */
-export function getRangeDay(): { startTime: number; endTime: number } {
+export function getRangeDay (): { startTime: number; endTime: number } {
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
@@ -16,7 +15,7 @@ export function getRangeDay(): { startTime: number; endTime: number } {
 }
 
 /** 本周一0点～现在 */
-export function getRangeWeek(): { startTime: number; endTime: number } {
+export function getRangeWeek (): { startTime: number; endTime: number } {
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
@@ -32,7 +31,7 @@ export function getRangeWeek(): { startTime: number; endTime: number } {
 }
 
 /** 本月1日0点～现在 */
-export function getRangeMonth(): { startTime: number; endTime: number } {
+export function getRangeMonth (): { startTime: number; endTime: number } {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
@@ -45,7 +44,7 @@ export function getRangeMonth(): { startTime: number; endTime: number } {
 }
 
 /** 本年1月1日0点～现在 */
-export function getRangeYear(): { startTime: number; endTime: number } {
+export function getRangeYear (): { startTime: number; endTime: number } {
     const today = new Date();
     const year = today.getFullYear();
 
@@ -57,7 +56,7 @@ export function getRangeYear(): { startTime: number; endTime: number } {
 }
 
 /** 获取从A-B时间，共有多少天时秒 */
-export function getTimeGap(big: number, small: number) {
+export function getTimeGap (big: number, small: number) {
     const gap = big - small;
 
     const hour = ~~(gap / 1000 / 60 / 60) % 24;
@@ -75,7 +74,7 @@ export function getTimeGap(big: number, small: number) {
 }
 
 /** 获取标准时间字符串 */
-export function getTime(mills: number) {
+export function getTime (mills: number) {
     const date = new Date(mills);
 
     const year = date.getFullYear();
@@ -93,7 +92,7 @@ export function getTime(mills: number) {
 }
 
 /** 仅用于查看函数耗时 */
-export function TimeLog(message: string) {
+export function TimeLog (message: string) {
     return function (target: Object | Function, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<any>) {
         const original = descriptor.value;
 

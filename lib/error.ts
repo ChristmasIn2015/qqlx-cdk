@@ -12,9 +12,9 @@ MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.UNKNOWN, { value: ENUM_ERROR_CODE.UNKNOW
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.BUSY_REMOTE_WECHAT, { value: ENUM_ERROR_CODE.BUSY_REMOTE_WECHAT, message: "微信：系统繁忙，请重新试试" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.MESS_REMOTE_WECHAT, { value: ENUM_ERROR_CODE.MESS_REMOTE_WECHAT, message: "微信：不理想的返回值" });
 
-const getErrorTranslate = function (code: ENUM_ERROR_CODE, message?: string): NumberTransOption | null {
-    const match = MAP_ENUM_ERROR_CODE.get(code) || null
-    match && message && (match.message += message)
+const getErrorTranslate = function (code: ENUM_ERROR_CODE, message?: string): NumberTransOption {
+    const match = MAP_ENUM_ERROR_CODE.get(code) as NumberTransOption
+    message && (match.message += message)
 
     return match
 }

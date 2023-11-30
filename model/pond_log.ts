@@ -16,8 +16,8 @@ export class PondLogSchema implements PondLog {
     @Column({ type: 'varchar', default: "" })
     text: VARCHAR_PG = ""
 
-    @Column({ type: "bigint", default: BigInt(-1) })
-    duration: BIGINT_PG = BigInt(-1)
+    @Column({ type: "bigint", default: -1 })
+    duration: number = -1
 
     // =============================
     // ======= 必须有的字段 ========
@@ -32,9 +32,9 @@ export class PondLogSchema implements PondLog {
     @Column({ type: "boolean", default: false })
     isDisabled: boolean = false
 
-    @Column({ type: "bigint", default: BigInt(Date.now()) })
-    timeCreate: BIGINT_PG = BigInt(Date.now())
+    @Column({ type: "bigint", default: 0 })
+    timeCreate: number = 0
 
-    @Column({ type: "bigint", default: BigInt(Date.now()) })
-    timeUpdate: BIGINT_PG = BigInt(Date.now())
+    @Column({ type: "bigint", default: 0 })
+    timeUpdate: number = 0
 }

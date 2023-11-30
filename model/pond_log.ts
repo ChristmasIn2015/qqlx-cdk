@@ -17,7 +17,7 @@ export class PondLogSchema implements PondLog {
     text: VARCHAR_PG = ""
 
     @Column({ type: "bigint", default: -1 })
-    duration: BIGINT_PG = -1
+    duration: BIGINT_PG = BigInt(-1)
 
     // =============================
     // ======= 必须有的字段 ========
@@ -33,8 +33,8 @@ export class PondLogSchema implements PondLog {
     isDisabled: boolean = false
 
     @Column({ type: "bigint", default: -1 })
-    timeCreate: BIGINT_PG = Date.now()
+    timeCreate: BIGINT_PG = BigInt(Date.now())
 
     @Column({ type: "bigint", default: -1 })
-    timeUpdate: BIGINT_PG = Date.now()
+    timeUpdate: BIGINT_PG = BigInt(Date.now())
 }

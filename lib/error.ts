@@ -7,11 +7,15 @@ MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.AUTHORIZATION_BELOW, { value: ENUM_ERROR
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.REMAINDER_BELOW, { value: ENUM_ERROR_CODE.REMAINDER_BELOW, message: "剩余可用时间已不足" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.NOT_FOUND_USER, { value: ENUM_ERROR_CODE.NOT_FOUND_USER, message: "找不到此用户" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.NOT_FOUND_BRAND, { value: ENUM_ERROR_CODE.NOT_FOUND_BRAND, message: "找不到此主体" });
+MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.NOT_FOUND_ENTITY, { value: ENUM_ERROR_CODE.NOT_FOUND_ENTITY, message: "找不到这条记录" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.UNKNOWN, { value: ENUM_ERROR_CODE.UNKNOWN, message: "未知错误，请重新试试" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.BUSY_REMOTE_WECHAT, { value: ENUM_ERROR_CODE.BUSY_REMOTE_WECHAT, message: "微信：系统繁忙，请重新试试" });
 MAP_ENUM_ERROR_CODE.set(ENUM_ERROR_CODE.MESS_REMOTE_WECHAT, { value: ENUM_ERROR_CODE.MESS_REMOTE_WECHAT, message: "微信：不理想的返回值" });
 
-const getErrorTranslate = function (code: ENUM_ERROR_CODE): NumberTransOption | null {
-    return MAP_ENUM_ERROR_CODE.get(code) || null
+const getErrorTranslate = function (code: ENUM_ERROR_CODE, message?: string): NumberTransOption | null {
+    const match = MAP_ENUM_ERROR_CODE.get(code) || null
+    match && message && (match.message += message)
+
+    return match
 }
 export { MAP_ENUM_ERROR_CODE, getErrorTranslate };

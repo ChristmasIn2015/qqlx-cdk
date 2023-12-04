@@ -1,9 +1,8 @@
 
 export * from "./lib/enum.time";
 
-export * from "./lib/function.list";
-export * from "./lib/function.object";
-export * from "./lib/function.time";
+export * from "./lib/object";
+export * from "./lib/time";
 
 // 2023/11/29
 

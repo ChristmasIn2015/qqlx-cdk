@@ -32,9 +32,9 @@ export class PondLogSchema implements PondLog {
     @Column({ type: "boolean", default: false })
     isDisabled: boolean = false
 
-    @Column({ type: "bigint", default: 0 })
-    timeCreate: number = 0
+    @Column({ type: "bigint", default: BigInt(0) })
+    timeCreate: BIGINT_PG = BigInt(0)
 
-    @Column({ type: "bigint", default: 0 })
-    timeUpdate: number = 0
+    @Column({ type: "bigint", default: BigInt(0) })
+    timeUpdate: BIGINT_PG = BigInt(0)
 }

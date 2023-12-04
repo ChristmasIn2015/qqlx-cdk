@@ -1,6 +1,9 @@
 
+import type { TimeFilter } from "qqlx-core"
+import { toString } from "./verify";
+
 /** 今天0点～今天午夜12点 */
-export function getRangeDay (): { startTime: number; endTime: number } {
+export function getRangeDay (): TimeFilter {
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
@@ -9,13 +12,13 @@ export function getRangeDay (): { startTime: number; endTime: number } {
 
     const time = today.getTime();
     return {
-        startTime: time,
-        endTime: time + 86400000,
+        startTime: toString(time),
+        endTime: toString(time + 86400000),
     };
 }
 
 /** 本周一0点～现在 */
-export function getRangeWeek (): { startTime: number; endTime: number } {
+export function getRangeWeek (): TimeFilter {
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
@@ -25,33 +28,33 @@ export function getRangeWeek (): { startTime: number; endTime: number } {
     const day = today.getDay(); // 今天是星期几, 星期天是0
     const monday = today.getTime() - ((day === 0 ? 7 : day) - 1) * 86400000;
     return {
-        startTime: monday,
-        endTime: Date.now() + 86400000,
+        startTime: toString(monday),
+        endTime: toString(Date.now() + 86400000),
     };
 }
 
 /** 本月1日0点～现在 */
-export function getRangeMonth (): { startTime: number; endTime: number } {
+export function getRangeMonth (): TimeFilter {
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
 
     const firstDay = new Date(`${year}/${month}/01 00:00`);
     return {
-        startTime: firstDay.getTime(),
-        endTime: Date.now() + 86400000,
+        startTime: toString(firstDay.getTime()),
+        endTime: toString(Date.now() + 86400000),
     };
 }
 
 /** 本年1月1日0点～现在 */
-export function getRangeYear (): { startTime: number; endTime: number } {
+export function getRangeYear (): TimeFilter {
     const today = new Date();
     const year = today.getFullYear();
 
     const firstDay = new Date(`${year}/01/01 00:00`);
     return {
-        startTime: firstDay.getTime(),
-        endTime: Date.now() + 86400000,
+        startTime: toString(firstDay.getTime()),
+        endTime: toString(Date.now() + 86400000),
     };
 }
 

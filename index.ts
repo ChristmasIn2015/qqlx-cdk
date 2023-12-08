@@ -8,7 +8,7 @@ export * from "./lib/time";
 
 export * from "./lib/error";
 export * from "./lib/response";
-export * from "./lib/time";
+export * from "./lib/search";
 export * from "./lib/verify";
 
 export * from "./model/pond_log";

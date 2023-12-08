@@ -1,0 +1,16 @@
+{
+    "testEnvironment": "jest-environment-node",
+    "testMatch": [
+        "<rootDir>/lib/*.test.ts"
+    ],
+    "transform": {
+        "^.+\\.ts$": "ts-jest",
+        "<transform_regex>": [
+            "ts-jest",
+            {
+                "tsconfig": "tsconfig.json"
+            }
+        ]
+    },
+    "verbose": true
+}

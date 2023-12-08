@@ -1,56 +1,59 @@
 /** 仅判断入参是否是 null, undefined, NaN，以及无意义的字符串 */
-export function isValidValue (value: any) {
-    const charge1 = [null, undefined, NaN].includes(value)
-    const charge2 = ["null", "undefined", "NaN"].includes(String(value).replace(/\s/g, ""))
+export function isValid (mess: any): boolean {
+    const isErrorValue = [null, undefined, NaN].includes(mess)
+    const isErrorString = ["null", "undefined", "NaN"].includes(String(mess).replace(/\s/g, ""))
 
-    return !(charge1 || charge2)
+    return !(isErrorValue || isErrorString)
 }
 
 /** 仅判断入参是否是一个 JavaScript 对象 */
-export function isObject (value: any) {
-    if (isValidValue(value) === false) return false
-    else if (["number", "string", "boolean"].includes(typeof value)) return false
-    else return true
+export function isObject (mess: any): boolean {
+    if (isValid(mess)) {
+        return ["number", "string", "boolean"].includes(typeof mess) ? false : true
+    } else {
+        return false
+    }
 }
 
-/** 仅判断入参是否是一个 JavaScript 数字
- * @transform 如果不是数字，将入参变成指定的数字
+/** 转换成数字
+ * @expect 对象会变成 NaN 然后返回 0
+ * @wanner 如果 mess 不正确则会返回这个期望的值
 */
-export function toNumber (value: any, transform?: number) {
-    const result = { value: Number(value) || 0 }
-
-    if (isValidValue(transform)) {
-        result.value = Number(transform || 0)
+export function toNumber (mess: any, wanner?: number): number {
+    if (isValid(mess)) {
+        if (mess === true) return 0
+        else if (typeof mess === 'number') return mess || 0
+        else if (isValid(wanner)) return Number(wanner) || 0
+        else return Number(mess) || 0
+    } else {
+        if (isValid(wanner)) return Number(wanner) || 0
+        else return 0
     }
-
-    return result.value
-}
-
-
-/** 仅判断入参是否是一个 JavaScript 数字
- * @transform 将入参变成数字
-*/
-export function toString (value: any, transform?: string) {
-    const result = { value: String(value) || "" }
-
-    if (isValidValue(transform)) {
-        result.value = String(transform || "")
-    }
-
-    // 如果最终值是奇怪的字符串，就换成空字符串
-    else if (["null", "undefined", "NaN"].includes(String(result.value).replace(/\s/g, ""))) {
-        result.value = ""
-    }
-
-    return result.value
 }
 
 
-/** 仅判断入参是否是一个 JavaScript 数字
- * @transform 将入参变成数字
+/** 转换成字符串
+ * @expect 对象会变成 [object Object]
+ * @wanner 如果 mess 不正确则会返回这个期望的值
 */
-export function toBoolean (value: any) {
-    const result = { value: Boolean(value) }
+export function toString (mess: any, wanner?: string): string {
+    if (isValid(mess)) {
+        if (isValid(wanner)) return String(wanner) || ""
+        else return String(mess) || ""
+    } else {
+        return ""
+    }
+}
 
-    return result.value
+
+/** 转换成 true\false
+ * @expect 字符串 “false” 将会是 false
+ */
+export function toBoolean (mess: any): boolean {
+    if (isValid(mess)) {
+        const isFalseStr = String(mess).replace(/\s/g, "") === "false"
+        return isFalseStr ? false : Boolean(mess)
+    } else {
+        return false
+    }
 }

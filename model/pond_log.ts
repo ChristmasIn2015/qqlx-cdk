@@ -2,9 +2,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, DataSource } from "typeorm"
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, PondLog, SMALLINT_PG } from "qqlx-core"
-import { RELATIONS_POND_LOG_NAME, ENUM_POND_LOG } from "qqlx-core"
+import { RELATIONS_POND_LOG, ENUM_POND_LOG } from "qqlx-core"
 
-@Entity({ name: RELATIONS_POND_LOG_NAME })
+@Entity({ name: RELATIONS_POND_LOG })
 export class PondLogSchema implements PondLog {
 
     @Column({ type: "smallint", default: ENUM_POND_LOG.ALL })
@@ -25,9 +25,6 @@ export class PondLogSchema implements PondLog {
 
     @PrimaryGeneratedColumn({ type: "integer" })
     id: number = -1
-
-    @Column({ type: 'varchar', length: 50, default: "" })
-    _id: VARCHAR50_PG = ""
 
     @Column({ type: "boolean", default: false })
     isDisabled: boolean = false

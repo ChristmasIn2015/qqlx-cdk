@@ -16,7 +16,7 @@
     "author": "huangwenqiang",
     "license": "ISC",
     "dependencies": {
-        "qqlx-core": "^2.0.32",
+        "qqlx-core": "^2.0.33",
         "typeorm": "^0.3.17"
     },
     "devDependencies": {

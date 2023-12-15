@@ -3,7 +3,7 @@ import { getErrorTranslate } from "./error";
 
 /** 校验 Response 200 */
 export function getResponseData<T> (response: Response<T>) {
-    if (response.code !== 200) throw response.message;
+    if (response.code !== 200) throw new Error(response.message);
 
     return response.data;
 }

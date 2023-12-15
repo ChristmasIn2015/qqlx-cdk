@@ -5,7 +5,7 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "update": "pnpm up qqlx-core",
+        "update": "pnpm update qqlx-core && pnpm install qqlx-core",
         "build": "npm run test && npm run update && tsc && git add . && git commit -m updates",
         "test": "jest --config=jtest.json",
         "commit": "npm run build && git push",
@@ -16,7 +16,7 @@
     "author": "huangwenqiang",
     "license": "ISC",
     "dependencies": {
-        "qqlx-core": "^2.0.35",
+        "qqlx-core": "^2.0.38",
         "typeorm": "^0.3.17"
     },
     "devDependencies": {

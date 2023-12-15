@@ -5,8 +5,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "update": "yarn add qqlx-core",
-        "build": "yarn test && yarn update && tsc && git add . && git commit -m updates",
+        "update": "pnpm up qqlx-core",
+        "build": "npm run test && npm run update && tsc && git add . && git commit -m updates",
         "test": "jest --config=jtest.json",
         "commit": "npm run build && git push",
         "patch": "npm run commit && npm version patch && git push && npm publish",
@@ -16,11 +16,12 @@
     "author": "huangwenqiang",
     "license": "ISC",
     "dependencies": {
-        "qqlx-core": "^2.0.34",
+        "qqlx-core": "^2.0.35",
         "typeorm": "^0.3.17"
     },
     "devDependencies": {
         "@types/jest": "^29.5.11",
+        "@types/node": "^20.10.4",
         "jest": "^29.7.0",
         "ts-jest": "^29.1.1",
         "typescript": "^5.0.2"

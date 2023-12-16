@@ -26,6 +26,16 @@ export class PondLogSchema implements PondLog {
     duration: SMALLINT_PG = -1;
 
     // =============================
+    // ======= 必要校验 ========
+    // =============================
+    @BeforeInsert()
+    @BeforeUpdate()
+    applyTransformations(): void {
+        const is_enum_valid = Object.values(ENUM_POND_LOG).includes(this.type);
+        if (!is_enum_valid) this.type = ENUM_POND_LOG.ALL;
+    }
+
+    // =============================
     // ======= 必须有的字段 ========
     // =============================
 

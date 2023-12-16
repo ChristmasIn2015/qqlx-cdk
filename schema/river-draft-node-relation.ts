@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, DataSource, ColumnType } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "qqlx-core";
@@ -21,6 +21,16 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
         default: ENUM_DRAFT_NODE_RELATION.NONE,
     })
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
+
+    // =============================
+    // ======= 必要校验 ========
+    // =============================
+    @BeforeInsert()
+    @BeforeUpdate()
+    applyTransformations(): void {
+        const is_enum_valid = Object.values(ENUM_DRAFT_NODE_RELATION).includes(this.relation);
+        if (!is_enum_valid) this.relation = ENUM_DRAFT_NODE_RELATION.NONE;
+    }
 
     // =============================
     // ======= 必须有的字段 ========

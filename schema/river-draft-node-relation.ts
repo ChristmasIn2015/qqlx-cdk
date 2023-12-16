@@ -33,8 +33,8 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
     isDisabled: boolean = false;
 
     @Column({ type: "bigint", transformer: new TransformerBigInteger() })
-    timeCreate: BIGINT_PG = "-1";
+    timeCreate: BIGINT_PG = Date.now().toString();
 
     @Column({ type: "bigint", transformer: new TransformerBigInteger() })
-    timeUpdate: BIGINT_PG = "-1";
+    timeUpdate: BIGINT_PG = Date.now().toString();
 }

@@ -10,4 +10,6 @@ export * from "./lib/response";
 export * from "./lib/search";
 export * from "./lib/verify";
 
-export * from "./model/pond-log";
+export * from "./schema/pond-log";
+export * from "./schema/river-draft-node";
+export * from "./schema/river-draft-node-relation";

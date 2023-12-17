@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG, DraftNode } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "qqlx-core";
@@ -37,9 +37,11 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
     // ======= JOIN ========
     // =============================
     @ManyToOne(() => DraftNodeSchema)
+    @JoinColumn({ name: "cid" })
     cNode?: DraftNode;
 
     @ManyToOne(() => DraftNodeSchema)
+    @JoinColumn({ name: "pid" })
     pNode?: DraftNode;
 
     // =============================

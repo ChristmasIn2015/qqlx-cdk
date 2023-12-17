@@ -6,5 +6,8 @@ describe(`river-draft-node-relation.test`, () => {
         const schema = new DraftNodeRelationSchema();
         expect(schema.id).toBeUndefined();
         expect(schema.relation).toBe(ENUM_DRAFT_NODE_RELATION.NONE);
+
+        expect(schema.pNode).toBeUndefined();
+        expect(schema.cNode).toBeUndefined();
     });
 });

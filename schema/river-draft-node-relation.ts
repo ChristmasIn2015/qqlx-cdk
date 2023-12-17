@@ -1,11 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne } from "typeorm";
 
-import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG } from "qqlx-core";
+import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG, DraftNode } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "qqlx-core";
 
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
+import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema implements DraftNodeRelation {
@@ -31,6 +32,15 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
         const is_enum_valid = Object.values(ENUM_DRAFT_NODE_RELATION).includes(this.relation);
         if (!is_enum_valid) this.relation = ENUM_DRAFT_NODE_RELATION.NONE;
     }
+
+    // =============================
+    // ======= JOIN ========
+    // =============================
+    @ManyToOne(() => DraftNodeSchema)
+    cNode?: DraftNode;
+
+    @ManyToOne(() => DraftNodeSchema)
+    pNode?: DraftNode;
 
     // =============================
     // ======= 必须有的字段 ========

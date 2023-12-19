@@ -16,18 +16,18 @@ export function isObject (mess: any): boolean {
 }
 
 /** 转换成数字
- * @expect 对象会变成 NaN 然后返回 0
+ * @expect 对象会变成 NaN 然后返回 -1
  * @wanner 如果 mess 不正确则会返回这个期望的值
 */
 export function toNumber (mess: any, wanner?: number): number {
     if (isValid(mess)) {
-        if (mess === true) return 0
-        else if (typeof mess === 'number') return mess || 0
-        else if (isValid(wanner)) return Number(wanner) || 0
-        else return Number(mess) || 0
+        if (mess === true) return -1
+        else if (typeof mess === 'number') return mess || -1
+        else if (isValid(wanner)) return Number(wanner) || -1
+        else return Number(mess) || -1
     } else {
-        if (isValid(wanner)) return Number(wanner) || 0
-        else return 0
+        if (isValid(wanner)) return Number(wanner) || -1
+        else return -1
     }
 }
 

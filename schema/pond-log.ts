@@ -17,7 +17,7 @@ export class PondLogSchema implements PondLog {
             ENUM_POND_LOG.WARN
         )
     })
-    type: ENUM_POND_LOG = ENUM_POND_LOG.ALL;
+    type: ENUM_POND_LOG = ENUM_POND_LOG.WARN;
 
     @Column({ transformer: new TransformerVarchar50() })
     title: VARCHAR50_PG = "";

@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn } from "typeorm";
 
-import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG, DraftNode } from "qqlx-core";
+import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG, FOREIGN_ID, DraftNode } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "qqlx-core";
 
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
@@ -12,17 +12,18 @@ import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema implements DraftNodeRelation {
-    @Column({ type: "integer", transformer: new TransformerInteger() })
-    pid: INTEGER_PG = -1;
 
-    @Column({ type: "integer", transformer: new TransformerInteger() })
+    @Column({ transformer: new TransformerInteger() })
+    pid: FOREIGN_ID = null;
+
+    @Column({ transformer: new TransformerInteger() })
     cid: INTEGER_PG = -1;
 
     @Column({
-        type: "enum",
-        enum: ENUM_DRAFT_NODE_RELATION,
-        default: ENUM_DRAFT_NODE_RELATION.NONE,
-        transformer: new TransformerEnum(Object.values(ENUM_DRAFT_NODE_RELATION) as SMALLINT_PG[], ENUM_DRAFT_NODE_RELATION.NONE)
+        transformer: new TransformerEnum(
+            Object.values(ENUM_DRAFT_NODE_RELATION) as SMALLINT_PG[],
+            ENUM_DRAFT_NODE_RELATION.NONE
+        )
     })
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
 
@@ -41,15 +42,15 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
     // ======= 必须有的字段 ========
     // =============================
 
-    @PrimaryGeneratedColumn({ type: "integer" })
+    @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ type: "boolean", transformer: new TransformerBoolean() })
+    @Column({ transformer: new TransformerBoolean() })
     isDisabled: boolean = false;
 
-    @Column({ type: "bigint", transformer: new TransformerBigInteger() })
+    @Column({ transformer: new TransformerBigInteger() })
     timeCreate: BIGINT_PG = Date.now().toString();
 
-    @Column({ type: "bigint", transformer: new TransformerBigInteger() })
+    @Column({ transformer: new TransformerBigInteger() })
     timeUpdate: BIGINT_PG = Date.now().toString();
 }

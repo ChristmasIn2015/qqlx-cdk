@@ -12,20 +12,20 @@ import { TransformerEnum } from "../lib/transfor.enum";
 export class PondLogSchema implements PondLog {
 
     @Column({
-        type: "enum",
-        enum: ENUM_POND_LOG,
-        default: ENUM_POND_LOG.ALL,
-        transformer: new TransformerEnum(Object.values(ENUM_POND_LOG) as SMALLINT_PG[], ENUM_POND_LOG.WARN)
+        transformer: new TransformerEnum(
+            Object.values(ENUM_POND_LOG) as SMALLINT_PG[],
+            ENUM_POND_LOG.WARN
+        )
     })
     type: ENUM_POND_LOG = ENUM_POND_LOG.ALL;
 
-    @Column({ type: "varchar", transformer: new TransformerVarchar50() })
+    @Column({ transformer: new TransformerVarchar50() })
     title: VARCHAR50_PG = "";
 
-    @Column({ type: "varchar", transformer: new TransformerVarchar() })
+    @Column({ transformer: new TransformerVarchar() })
     text: VARCHAR_PG = "";
 
-    @Column({ type: "smallint", transformer: new TransformerSmallInt() })
+    @Column({ transformer: new TransformerSmallInt() })
     duration: SMALLINT_PG = -1;
 
     // =============================
@@ -35,12 +35,12 @@ export class PondLogSchema implements PondLog {
     @PrimaryGeneratedColumn({ type: "integer" })
     id!: number;
 
-    @Column({ type: "boolean", transformer: new TransformerBoolean() })
+    @Column({ transformer: new TransformerBoolean() })
     isDisabled: boolean = false;
 
-    @Column({ type: "bigint", transformer: new TransformerBigInteger() })
+    @Column({ transformer: new TransformerBigInteger() })
     timeCreate: BIGINT_PG = Date.now().toString();
 
-    @Column({ type: "bigint", transformer: new TransformerBigInteger() })
+    @Column({ transformer: new TransformerBigInteger() })
     timeUpdate: BIGINT_PG = Date.now().toString();
 }

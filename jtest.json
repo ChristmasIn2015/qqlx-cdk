@@ -1,6 +1,9 @@
 {
     "testEnvironment": "jest-environment-node",
-    "testMatch": ["<rootDir>/lib/*.test.ts", "<rootDir>/schema/*.test.ts"],
+    "testMatch": [
+        "<rootDir>/lib/*.test.ts",
+        "<rootDir>/schema-test/*.test.ts"
+    ],
     "transform": {
         "^.+\\.ts$": "ts-jest",
         "<transform_regex>": [

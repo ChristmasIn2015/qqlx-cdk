@@ -6,6 +6,8 @@ import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "q
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
+import { TransformerEnum } from "../lib/transfor.enum";
+
 import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
@@ -20,18 +22,9 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
         type: "enum",
         enum: ENUM_DRAFT_NODE_RELATION,
         default: ENUM_DRAFT_NODE_RELATION.NONE,
+        transformer: new TransformerEnum(Object.values(ENUM_DRAFT_NODE_RELATION) as SMALLINT_PG[], ENUM_DRAFT_NODE_RELATION.NONE)
     })
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
-
-    // =============================
-    // ======= 必要校验 ========
-    // =============================
-    @BeforeInsert()
-    @BeforeUpdate()
-    applyTransformations(): void {
-        const is_enum_valid = Object.values(ENUM_DRAFT_NODE_RELATION).includes(this.relation);
-        if (!is_enum_valid) this.relation = ENUM_DRAFT_NODE_RELATION.NONE;
-    }
 
     // =============================
     // ======= JOIN ========

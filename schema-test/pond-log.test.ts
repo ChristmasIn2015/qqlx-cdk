@@ -1,5 +1,5 @@
 import { ENUM_POND_LOG } from "qqlx-core";
-import { PondLogSchema } from "./pond-log";
+import { PondLogSchema } from "../schema/pond-log";
 
 describe(`pond-log.test`, () => {
     it("valid", () => {

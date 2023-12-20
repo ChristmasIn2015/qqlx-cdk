@@ -1,5 +1,5 @@
 /** 一个对象的值，如果是字符串，将会被去除空白内容 */
-export function trimObject(incoming: Record<string | symbol, any>) {
+export function trimObject (incoming: Record<string | symbol, any>) {
     if (!incoming) return;
 
     for (const key in incoming) {
@@ -10,7 +10,7 @@ export function trimObject(incoming: Record<string | symbol, any>) {
     }
 }
 
-export function getMongodbBase() {
+export function getMongodbBase () {
     return {
         _id: "",
         timeCreate: 0,
@@ -21,17 +21,18 @@ export function getMongodbBase() {
 }
 
 // 网上复制的，获取中文金额
-export function getChineseMoney(n: number) {
-    var fraction = ["角", "分"];
-    var digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
-    var unit = [
+export function getChineseMoney (n: number) {
+    const fraction = ["角", "分"];
+    const digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+    const unit = [
         ["元", "万", "亿"],
         ["", "拾", "佰", "仟"],
     ];
-    var head = n < 0 ? "欠" : "";
+
+    const head = n < 0 ? "欠" : "";
     n = Math.abs(n);
 
-    var s = "";
+    let s = "";
 
     for (var i = 0; i < fraction.length; i++) {
         s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, "");

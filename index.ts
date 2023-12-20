@@ -1,5 +1,3 @@
-export * from "./lib/enum.time";
-
 export * from "./lib/object";
 export * from "./lib/time";
 
@@ -7,6 +5,7 @@ export * from "./lib/time";
 
 export * from "./lib/error";
 export * from "./lib/response";
+export * from "./lib/search.match";
 export * from "./lib/search";
 export * from "./lib/verify";
 

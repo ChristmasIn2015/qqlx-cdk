@@ -13,65 +13,65 @@ import { toString } from "./verify"
 
 // ======================================================================================= 1
 
-export function getConditionMatchStr<T> (key: KeyString<T>): ConditionMatchStr<T> {
+export function getConditionMatchStr<T> (key: KeyString<T>, value: string = ""): ConditionMatchStr<T> {
     return {
         type: ConditionType.MatchStr,
-        key: key,
-        value: ""
+        key,
+        value
     }
 }
-export function getConditionMatchStrOrs<T> (key: KeyString<T>): ConditionMatchStrOrs<T> {
+export function getConditionMatchStrOrs<T> (key: KeyString<T>, value: string[] = []): ConditionMatchStrOrs<T> {
     return {
         type: ConditionType.MatchStrOrs,
-        key: key,
-        value: []
+        key,
+        value
     }
 }
 
 // ======================================================================================= 2
 
-export function getConditionMatchBool<T> (key: KeyBool<T>): ConditionMatchBool<T> {
+export function getConditionMatchBool<T> (key: KeyBool<T>, value: boolean = false): ConditionMatchBool<T> {
     return {
         type: ConditionType.MatchBool,
-        key: key,
-        value: false
+        key,
+        value
     }
 }
 
 // ======================================================================================= 3
 
-export function getConditionMatchEnum<T> (key: KeyAccumulatable<T>): ConditionMatchEnum<T> {
+export function getConditionMatchEnum<T> (key: KeyAccumulatable<T>, value: number = -1): ConditionMatchEnum<T> {
     return {
         type: ConditionType.MatchEnum,
-        key: key,
-        value: -1
+        key,
+        value
     }
 }
-export function getConditionMatchEnumOrs<T> (key: KeyAccumulatable<T>): ConditionMatchEnumOrs<T> {
+export function getConditionMatchEnumOrs<T> (key: KeyAccumulatable<T>, value: number[] = []): ConditionMatchEnumOrs<T> {
     return {
         type: ConditionType.MatchEnumOrs,
-        key: key,
-        value: []
+        key,
+        value
     }
 }
 
 // ======================================================================================= 4
 
-export function getConditionRegExpStr<T> (key: KeyString<T>): ConditionRegExpStr<T> {
+export function getConditionRegExpStr<T> (key: KeyString<T>, value: string = ""): ConditionRegExpStr<T> {
     return {
         type: ConditionType.RegExpStr,
-        key: key,
-        value: ""
+        key,
+        value
     }
 }
 
 // ======================================================================================= sort
 
-export function getConditionSort<T> (key: KeySortable<T>): ConditionSort<T> {
+export function getConditionSort<T> (key: KeySortable<T>, value: Sortable = Sortable.DESC): ConditionSort<T> {
     return {
         type: ConditionType.Sort,
-        key: key,
-        value: Sortable.DESC
+        key,
+        value
     }
 }
 

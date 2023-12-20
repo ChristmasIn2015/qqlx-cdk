@@ -32,7 +32,7 @@ export class PondLogSchema implements PondLog {
     // ======= 必须有的字段 ========
     // =============================
 
-    @PrimaryGeneratedColumn({ type: "integer" })
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Column({ transformer: new TransformerBoolean() })

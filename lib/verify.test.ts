@@ -46,11 +46,10 @@ for (const mess of [
             const result = verify.toNumber(mess)
             expect(result).toEqual(expect.any(Number))
 
-
             if ([null, undefined, NaN, "null", "undefined", "NaN"].includes(mess as any)) {
-                expect(result).toBe(0)
+                expect(result).toBe(-1)
             } else {
-                expect([-10086, 0, 10086]).toEqual(expect.arrayContaining([result]));
+                expect([-10086, -1, 0, 10086]).toEqual(expect.arrayContaining([result]));
             }
         })
         it("toNumber 5678", () => {

@@ -49,6 +49,7 @@ export function getConditionSort<T> (key: KeySortable<T>): ConditionSort<T> {
     }
 }
 
+/** 默认设置 0~当前时间 */
 export function getTimeFilter (): TimeFilter {
     return {
         startTime: "0",
@@ -56,6 +57,7 @@ export function getTimeFilter (): TimeFilter {
     };
 }
 
+/** 默认设置 0~当前时间 */
 export function getConditionTime<T> (key: KeyBigInt<T>): ConditionTime<T> {
     return {
         type: ConditionType.Time,

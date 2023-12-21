@@ -1,4 +1,4 @@
-import type { Page, PageRes, TimeFilter, KeyString, KeySortable, KeyBigInt, KeyBool, KeyAccumulatable } from "qqlx-core"
+import type { Page, PageRes, TimeFilter, KeyString, KeySortable, KeyBigInt, KeyBool, KeyAccumulatable, ConditionMatchInteger, ConditionMatchIntegerOrs } from "qqlx-core"
 import type {
     ConditionMatchStr, ConditionMatchStrOrs,
     ConditionMatchBool,
@@ -50,6 +50,23 @@ export function getConditionMatchEnum<T> (key: KeyAccumulatable<T>, value: numbe
 export function getConditionMatchEnumOrs<T> (key: KeyAccumulatable<T>, value: number[] = []): ConditionMatchEnumOrs<T> {
     return {
         type: ConditionType.MatchEnumOrs,
+        key,
+        value
+    }
+}
+
+// ======================================================================================= 3
+
+export function getConditionMatchInteger<T> (key: KeyAccumulatable<T>, value: number = -1): ConditionMatchInteger<T> {
+    return {
+        type: ConditionType.MatchInteger,
+        key,
+        value
+    }
+}
+export function getConditionMatchIntegerOrs<T> (key: KeyAccumulatable<T>, value: number[] = []): ConditionMatchIntegerOrs<T> {
+    return {
+        type: ConditionType.MatchIntegerOrs,
         key,
         value
     }

@@ -19,6 +19,9 @@ export function isObject (mess: any): boolean {
  * @expect Number(object) => NaN => -1
  * @expect Number(true) => 1 => -1
  * @wanner 如果 mess 不正确则返回这个期望 wanner 值
+ * @expect Math.ceil 向前取整 如 1.2=>2, -1.2=>-1
+ * @expect Math.round 四舍五入取整
+ * @expect Math.floor 向后取整 如 1.2=>1, -1.2=>-2
 */
 export function toNumber (mess: any, wanner?: number): number {
     if (isValid(wanner)) {

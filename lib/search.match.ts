@@ -3,7 +3,7 @@ import type {
     ConditionMatchStr, ConditionMatchStrOrs,
     ConditionMatchBool,
     ConditionMatchEnum, ConditionMatchEnumOrs,
-    ConditionRegExpStr,
+    ConditionRegExp,
     ConditionSort,
     ConditionTime
 } from "qqlx-core"
@@ -57,7 +57,7 @@ export function getConditionMatchEnumOrs<T> (key: KeyAccumulatable<T>, value: nu
 
 // ======================================================================================= 4
 
-export function getConditionRegExpStr<T> (key: KeyString<T>, value: string = ""): ConditionRegExpStr<T> {
+export function getConditionRegExp<T> (key: KeyString<T>, value: RegExp): ConditionRegExp<T> {
     return {
         type: ConditionType.RegExpStr,
         key,

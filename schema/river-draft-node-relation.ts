@@ -12,18 +12,14 @@ import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema implements DraftNodeRelation {
-
     @Column({ transformer: new TransformerInteger() })
-    pid: FOREIGN_ID = null;
+    pid: INTEGER_PG = -1;
 
     @Column({ transformer: new TransformerInteger() })
     cid: INTEGER_PG = -1;
 
     @Column({
-        transformer: new TransformerEnum(
-            Object.values(ENUM_DRAFT_NODE_RELATION) as SMALLINT_PG[],
-            ENUM_DRAFT_NODE_RELATION.NONE
-        )
+        transformer: new TransformerEnum(Object.values(ENUM_DRAFT_NODE_RELATION) as SMALLINT_PG[], ENUM_DRAFT_NODE_RELATION.NONE),
     })
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
 

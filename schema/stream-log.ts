@@ -1,23 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } from "typeorm";
 
-import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, PondLog, SMALLINT_PG } from "qqlx-core";
-import { RELATIONS_POND_LOG, ENUM_POND_LOG } from "qqlx-core";
+import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, StreamLog, SMALLINT_PG } from "qqlx-core";
+import { RELATIONS_STREAM_LOG, ENUM_STREAM_LOG } from "qqlx-core";
 
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 
-@Entity({ name: RELATIONS_POND_LOG })
-export class PondLogSchema implements PondLog {
-
+@Entity({ name: RELATIONS_STREAM_LOG })
+export class StreamLogSchema implements StreamLog {
     @Column({
-        transformer: new TransformerEnum(
-            Object.values(ENUM_POND_LOG) as SMALLINT_PG[],
-            ENUM_POND_LOG.WARN
-        )
+        transformer: new TransformerEnum(Object.values(ENUM_STREAM_LOG) as SMALLINT_PG[], ENUM_STREAM_LOG.WARN),
     })
-    type: ENUM_POND_LOG = ENUM_POND_LOG.WARN;
+    type: ENUM_STREAM_LOG = ENUM_STREAM_LOG.WARN;
 
     @Column({ transformer: new TransformerVarchar50() })
     title: VARCHAR50_PG = "";

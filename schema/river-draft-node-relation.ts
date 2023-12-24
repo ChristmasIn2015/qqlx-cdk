@@ -12,6 +12,9 @@ import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema implements DraftNodeRelation {
+    @Column({ transformer: new TransformerVarchar50() })
+    uid: VARCHAR50_PG = "";
+
     @Column({ transformer: new TransformerInteger() })
     pid: INTEGER_PG = -1;
 
@@ -23,9 +26,13 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
     })
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
 
+    @Column({ transformer: new TransformerInteger() })
+    order: SMALLINT_PG = -1;
+
     // =============================
     // ======= JOIN ========
     // =============================
+
     @ManyToOne(() => DraftNodeSchema)
     @JoinColumn({ name: "cid" })
     cNode?: DraftNode;

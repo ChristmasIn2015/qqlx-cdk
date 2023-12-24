@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, DataSource, OneToMany, JoinColumn } from "typeorm";
 
-import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNode, SMALLINT_PG, DraftNodeRelation } from "qqlx-core";
-import { RELATIONS_RIVER_DRAFT_NODE, ENUM_POND_LOG } from "qqlx-core";
+import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNode, SMALLINT_PG, DraftNodeRelation, INTEGER_PG } from "qqlx-core";
+import { RELATIONS_RIVER_DRAFT_NODE, ENUM_STREAM_LOG } from "qqlx-core";
 
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
@@ -15,6 +15,9 @@ export class DraftNodeSchema implements DraftNode {
 
     @Column({ transformer: new TransformerVarchar() })
     richtext: VARCHAR_PG = "";
+
+    @Column({ transformer: new TransformerInteger() })
+    rid: INTEGER_PG = -1;
 
     // =============================
     // ======= 必须有的字段 ========

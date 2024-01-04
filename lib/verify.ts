@@ -1,9 +1,8 @@
+export const INVALUE_VALUE_LIST = [null, undefined, NaN, "null", "undefined", "NaN"]
+
 /** 仅判断入参是否是 null, undefined, NaN，以及无意义的字符串 */
 export function isValid (mess: any): boolean {
-    const isErrorValue = [null, undefined, NaN].includes(mess)
-    const isErrorString = ["null", "undefined", "NaN"].includes(String(mess).replace(/\s/g, ""))
-
-    return !(isErrorValue || isErrorString)
+    return !INVALUE_VALUE_LIST.includes(String(mess).replace(/\s/g, ""))
 }
 
 /** 仅判断入参是否是一个 JavaScript 对象 */

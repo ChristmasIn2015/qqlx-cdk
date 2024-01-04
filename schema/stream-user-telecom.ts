@@ -1,30 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate } from "typeorm";
 
-import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, StreamAccess, INTEGER_PG, StreamAccessGroup } from "qqlx-core";
-import { RELATIONS_STREAM_ACCESS, ENUM_STREAM_ACCESS } from "qqlx-core";
+import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, INTEGER_PG, UserTelecom } from "qqlx-core";
+import { RELATIONS_STREAM_USER, RELATIONS_STREAM_USER_WECHAT, RELATIONS_STREAM_USER_TELECOM } from "qqlx-core";
 
 import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "../lib/transfor.number";
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
-import { StreamAccessGroupSchema } from "./stream-access-group";
 
-@Entity({ name: RELATIONS_STREAM_ACCESS })
-export class StreamAccessSchema implements StreamAccess {
-    @Column({ transformer: new TransformerInteger() })
-    gid: INTEGER_PG = -1;
+@Entity({ name: RELATIONS_STREAM_USER_TELECOM })
+export class UserTelecomSchema implements UserTelecom {
 
-    @Column({
-        transformer: new TransformerEnum(Object.values(ENUM_STREAM_ACCESS) as ENUM_STREAM_ACCESS[], ENUM_STREAM_ACCESS.READONLY),
-    })
-    type: ENUM_STREAM_ACCESS = ENUM_STREAM_ACCESS.READONLY;
+    @Column({ transformer: new TransformerVarchar50() })
+    uuid32: VARCHAR50_PG = '';
 
-    // =============================
-    // ======= JOIN ========
-    // =============================
-
-    @ManyToOne(() => StreamAccessGroupSchema)
-    joinAccessGroup: StreamAccessGroup;
+    @Column({ transformer: new TransformerVarchar50() })
+    phone: VARCHAR50_PG = '';
 
     // =============================
     // ======= 必须有的字段 ========

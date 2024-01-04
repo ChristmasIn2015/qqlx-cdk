@@ -8,9 +8,11 @@ for (const mess of [
     "null",
     "undefined",
     "NaN",
-    0,
-    -10086,
+    "object",
     10086,
+    0,
+    -1,
+    -10086,
     "",
     "10086",
     "true",
@@ -18,14 +20,15 @@ for (const mess of [
     true,
     false,
     {},
+    new Object,
     new Map(),
     function () { },
 ]) {
-    describe(`${mess} of ${typeof mess}`, () => {
+    describe(`[${typeof mess}] ${mess} testing...`, () => {
         it("isValid", () => {
             const result = verify.isValid(mess)
 
-            if ([null, undefined, NaN, "null", "undefined", "NaN"].includes(mess as any)) {
+            if (verify.INVALUE_VALUE_LIST.includes(mess as any)) {
                 expect(result).toBe(false)
             } else {
                 expect(result).toBe(true)

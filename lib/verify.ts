@@ -1,4 +1,10 @@
 export const INVALUE_VALUE_LIST = [null, undefined, NaN, "null", "undefined", "NaN"]
+export const DEFAULT_VALUE_LIST = [
+    true, false,
+    "", Array(999).fill("#").join(""),
+    -999, -1, 0, 1, 999, Number.MAX_SAFE_INTEGER, Number.MAX_VALUE,
+    {}, { name: 'hello' }, new Map()
+]
 
 /** 仅判断入参是否是 null, undefined, NaN，以及无意义的字符串 */
 export function isValid (mess: any): boolean {

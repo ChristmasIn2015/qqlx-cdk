@@ -1,9 +1,12 @@
 export const INVALUE_VALUE_LIST = [null, undefined, NaN, "null", "undefined", "NaN"]
 export const DEFAULT_VALUE_LIST = [
     true, false,
+    "true", "false",
     "", Array(999).fill("#").join(""),
-    -999, -1, 0, 1, 999, Number.MAX_SAFE_INTEGER, Number.MAX_VALUE,
-    {}, { name: 'hello' }, new Map()
+    -999, -1, 0, 1, 999,
+    Number.MAX_SAFE_INTEGER, Number.MAX_VALUE, -1 * Number.MAX_SAFE_INTEGER, -1 * Number.MAX_VALUE,
+    {}, { name: 'hello' }, new Map(),
+    function () { }
 ]
 
 /** 仅判断入参是否是 null, undefined, NaN，以及无意义的字符串 */

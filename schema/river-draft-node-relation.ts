@@ -10,9 +10,8 @@ import { TransformerEnum } from "../lib/transfor.enum";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema implements DraftNodeRelation {
-
     @Column({ transformer: new TransformerVarchar50() })
-    uuid32: VARCHAR50_PG = '';
+    uuid32: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerInteger() })
     pid: INTEGER_PG = -1;
@@ -30,6 +29,20 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
 
     @Column({ transformer: new TransformerInteger() })
     order: SMALLINT_PG = -1;
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction() {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 
     // =============================
     // ======= 必须有的字段 ========

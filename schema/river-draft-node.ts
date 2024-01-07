@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, DataSource, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, DataSource, OneToMany, JoinColumn, BeforeInsert } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNode, SMALLINT_PG, INTEGER_PG } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE, ENUM_STREAM_LOG } from "qqlx-core";
@@ -10,15 +10,28 @@ import { DraftNodeRelationSchema } from "./river-draft-node-relation";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE })
 export class DraftNodeSchema implements DraftNode {
-
     @Column({ transformer: new TransformerVarchar50() })
-    uuid32: VARCHAR50_PG = '';
+    uuid32: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerVarchar50() })
     title: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerVarchar() })
     richtext: VARCHAR_PG = "";
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction() {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 
     // =============================
     // ======= 必须有的字段 ========

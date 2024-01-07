@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, BeforeInsert } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, StreamUserAccessGroup, INTEGER_PG, StreamUserAccess } from "qqlx-core";
 import { RELATIONS_STREAM_USER_ACCESS, RELATIONS_STREAM_USER_ACCESS_GROUP } from "qqlx-core";
@@ -10,12 +10,25 @@ import { TransformerEnum } from "../lib/transfor.enum";
 
 @Entity({ name: RELATIONS_STREAM_USER_ACCESS })
 export class StreamUserAccessSchema implements StreamUserAccess {
-
     @Column({ transformer: new TransformerVarchar50() })
-    uuid32: VARCHAR50_PG = '';
+    uuid32: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerInteger() })
     gid: INTEGER_PG = -1;
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction() {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 
     // =============================
     // ======= 必须有的字段 ========

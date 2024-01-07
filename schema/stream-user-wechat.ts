@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, BeforeInsert } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, INTEGER_PG, UserWeChat, VARCHAR255_PG } from "qqlx-core";
 import { RELATIONS_STREAM_USER, RELATIONS_STREAM_USER_WECHAT, RELATIONS_STREAM_USER_TELECOM } from "qqlx-core";
@@ -10,18 +10,31 @@ import { TransformerEnum } from "../lib/transfor.enum";
 
 @Entity({ name: RELATIONS_STREAM_USER_WECHAT })
 export class UserWeChatSchema implements UserWeChat {
+    @Column({ transformer: new TransformerVarchar50() })
+    uuid32: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerVarchar50() })
-    uuid32: VARCHAR50_PG = '';
+    unionId: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerVarchar50() })
-    unionId: VARCHAR50_PG = '';
-
-    @Column({ transformer: new TransformerVarchar50() })
-    nickname: VARCHAR50_PG = '';
+    nickname: VARCHAR50_PG = "";
 
     @Column({ transformer: new TransformerVarchar255() })
-    avator: VARCHAR255_PG = '';
+    avator: VARCHAR255_PG = "";
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction() {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 
     // =============================
     // ======= 必须有的字段 ========

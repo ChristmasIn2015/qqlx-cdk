@@ -1,6 +1,6 @@
 {
     "name": "qqlx-cdk",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "description": "qqlx client develop kit",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

@@ -11,12 +11,13 @@ export * from "./lib/verify";
 
 // 2024/01/04
 
-export * from "./schema/stream-log"; // 日志
-export * from "./schema/stream-user"; // 用户
-export * from "./schema/stream-user-wechat";
-export * from "./schema/stream-user-telecom";
-export * from "./schema/stream-user-email";
-export * from "./schema/stream-user-access"; // 权限
-export * from "./schema/stream-user-access-group";
-export * from "./schema/river-draft-node"; // 草图
-export * from "./schema/river-draft-node-relation";
+export * from "./schema-development/pg-test-tuple"; // 测试
+export * from "./schema-production/stream-log"; // 日志
+export * from "./schema-production/stream-user"; // 用户
+export * from "./schema-production/stream-user-wechat";
+export * from "./schema-production/stream-user-telecom";
+export * from "./schema-production/stream-user-email";
+export * from "./schema-production/stream-user-access"; // 权限
+export * from "./schema-production/stream-user-access-group";
+export * from "./schema-production/river-draft-node"; // 草图
+export * from "./schema-production/river-draft-node-relation";

@@ -23,6 +23,12 @@ export class StreamLogSchema implements StreamLog {
     text: VARCHAR_PG = "";
 
     @Column({ transformer: new TransformerSmallInt() })
+    cpu: SMALLINT_PG = -1;
+
+    @Column({ transformer: new TransformerSmallInt() })
+    memery: SMALLINT_PG = -1;
+
+    @Column({ transformer: new TransformerSmallInt() })
     duration: SMALLINT_PG = -1;
 
     // =============================

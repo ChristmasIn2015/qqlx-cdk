@@ -15,6 +15,7 @@ export * from "./schema/stream-log"; // 日志
 export * from "./schema/stream-user"; // 用户
 export * from "./schema/stream-user-wechat";
 export * from "./schema/stream-user-telecom";
+export * from "./schema/stream-user-email";
 export * from "./schema/stream-user-access"; // 权限
 export * from "./schema/stream-user-access-group";
 export * from "./schema/river-draft-node"; // 草图

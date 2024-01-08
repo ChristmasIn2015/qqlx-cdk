@@ -1,7 +1,8 @@
 {
     "testEnvironment": "jest-environment-node",
     "testMatch": [
-        "<rootDir>/lib/*.test.ts"
+        "<rootDir>/lib/*.test.ts",
+        "<rootDir>/view-test/*.test.ts"
     ],
     "transform": {
         "^.+\\.ts$": "ts-jest",

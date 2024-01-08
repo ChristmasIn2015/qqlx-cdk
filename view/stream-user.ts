@@ -1,19 +1,21 @@
-import { UserInfo } from "qqlx-core";
+import { PATH_STREAM_USER, UserInfo, getStreamUserDto } from "qqlx-core";
+
 import { StreamUserSchema } from "../schema-production/stream-user";
+import { $request } from "./utils";
 
 export class StreamUserView {
 
     userInfo!: UserInfo
 
-    constructor() {
-    }
+    constructor() { }
+
 
     getSchema () {
-        return new StreamUserSchema
+        return new StreamUserSchema()
     }
 
-    setEntity (eneity: UserInfo) {
-        this.userInfo = eneity
+    async initialUserInfo () {
+        const dto: getStreamUserDto = null
+        this.userInfo = await $request.get(PATH_STREAM_USER)
     }
-
 }

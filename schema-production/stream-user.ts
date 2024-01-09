@@ -20,15 +20,12 @@ export class StreamUserSchema implements StreamUser {
     // =============================
 
     @OneToMany(t => UserWeChatSchema, s => s.joinStreamUser)
-    @JoinColumn({ name: 'uuid32' })
     joinWeChatList?: UserWeChat[];
 
     @OneToMany(t => UserTelecomSchema, s => s.joinStreamUser)
-    @JoinColumn({ name: 'uuid32' })
     joinTelecomList?: UserTelecom[];
 
     @OneToMany(t => UserEmailSchema, s => s.joinStreamUser)
-    @JoinColumn({ name: 'uuid32' })
     joinEmailList?: UserEmail[];
 
     // =============================

@@ -19,13 +19,13 @@ export class StreamUserSchema implements StreamUser {
     // ============ JOIN ===========
     // =============================
 
-    @OneToMany((type) => UserWeChatSchema, (s) => s.joinStreamUser)
+    @OneToMany((type) => UserWeChatSchema, (s) => s.uuid32)
     joinWeChatList?: UserWeChat[];
 
-    @OneToMany((type) => UserTelecomSchema, (s) => s.joinStreamUser)
+    @OneToMany((type) => UserTelecomSchema, (s) => s.uuid32)
     joinTelecomList?: UserTelecom[];
 
-    @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
+    @OneToMany((type) => UserEmailSchema, (s) => s.uuid32)
     joinEmailList?: UserEmail[];
 
     // =============================

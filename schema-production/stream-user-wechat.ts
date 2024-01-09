@@ -30,6 +30,6 @@ export class UserWeChatSchema extends PgBase implements UserWeChat {
     // =============================
 
     @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
-    @JoinColumn({ name: "joinStreamUser", referencedColumnName: "uuid32" })
+    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
     joinStreamUser?: StreamUser;
 }

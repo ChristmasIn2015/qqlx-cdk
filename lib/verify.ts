@@ -72,29 +72,6 @@ export function toBoolean (mess: any): boolean {
     }
 }
 
-/** 如果设置了一个函数，会被转换成 null @ChatGPT */
-export function NotFunction (target: any, key: string): void {
-    let val = target[key];
-
-    const getter = function () {
-        return val;
-    };
-
-    const setter = function (newVal: any) {
-        console.log(`Setting property ${key} with value:`, newVal);
-        if (newVal !== val) {
-            if (typeof newVal === 'function') {
-                val = newVal.toString();
-            } else {
-                val = newVal;
-            }
-        }
-    };
-
-    Object.defineProperty(target, key, {
-        get: getter,
-        set: setter,
-        enumerable: true,
-        configurable: true,
-    });
+export function isEnvBrower () {
+    return typeof process === 'undefined'
 }

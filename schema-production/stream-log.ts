@@ -7,7 +7,6 @@ import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
-import { NotFunction } from "../lib/verify";
 
 @Entity({ name: RELATIONS_STREAM_LOG })
 export class StreamLogSchema implements StreamLog {
@@ -32,20 +31,6 @@ export class StreamLogSchema implements StreamLog {
     duration: SMALLINT_PG = -1;
 
     // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction () {
-        for (const k in this) {
-            if (typeof this[k] === 'function') {
-                //@ts-ignore
-                this[k] = this[k].toString()
-            }
-        }
-    }
-
-    // =============================
     // ======= 必须有的字段 ========
     // =============================
 
@@ -60,4 +45,18 @@ export class StreamLogSchema implements StreamLog {
 
     @Column({ transformer: new TransformerBigInteger() })
     timeUpdate: BIGINT_PG = Date.now().toString();
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction () {
+        for (const k in this) {
+            if (typeof this[k] === 'function') {
+                //@ts-ignore
+                this[k] = this[k].toString()
+            }
+        }
+    }
 }

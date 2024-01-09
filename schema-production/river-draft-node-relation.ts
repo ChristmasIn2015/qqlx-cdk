@@ -31,20 +31,6 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
     order: SMALLINT_PG = -1;
 
     // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction() {
-        for (const k in this) {
-            if (typeof this[k] === "function") {
-                //@ts-ignore
-                this[k] = this[k].toString();
-            }
-        }
-    }
-
-    // =============================
     // ======= 必须有的字段 ========
     // =============================
 
@@ -59,4 +45,18 @@ export class DraftNodeRelationSchema implements DraftNodeRelation {
 
     @Column({ transformer: new TransformerBigInteger() })
     timeUpdate: BIGINT_PG = Date.now().toString();
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction () {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 }

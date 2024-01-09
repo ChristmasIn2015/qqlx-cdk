@@ -20,20 +20,6 @@ export class DraftNodeSchema implements DraftNode {
     richtext: VARCHAR_PG = "";
 
     // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction() {
-        for (const k in this) {
-            if (typeof this[k] === "function") {
-                //@ts-ignore
-                this[k] = this[k].toString();
-            }
-        }
-    }
-
-    // =============================
     // ======= 必须有的字段 ========
     // =============================
 
@@ -48,4 +34,18 @@ export class DraftNodeSchema implements DraftNode {
 
     @Column({ transformer: new TransformerBigInteger() })
     timeUpdate: BIGINT_PG = Date.now().toString();
+
+    // =============================
+    // ==== 插入之前不能是函数 ====
+    // =============================
+
+    @BeforeInsert()
+    notFunction () {
+        for (const k in this) {
+            if (typeof this[k] === "function") {
+                //@ts-ignore
+                this[k] = this[k].toString();
+            }
+        }
+    }
 }

@@ -1,20 +1,24 @@
-import { StreamUserEmailView } from "../view/stream-user-email";
-import { StreamUserView } from "../view/stream-user";
+import { ViewStreamUserEmail } from "../view/stream-user-email";
+import { ViewStreamUser } from "../view/stream-user";
 import { $request } from "../view/utils";
 
-describe("StreamUser-View", () => {
+declare global {
+    var Authorization: string;
+}
 
-    // 登录之前记得 curl -X GET "http://localhost:8003/stream/user/email/code?email=wqao1023@qq.com" 获取一下验证码
+describe("ViewStreamUser", () => {
+
+    /** 登录之前记得获取一下邮箱验证码
+     * @postEmailCode curl -X GET "http://localhost:8003/stream/user/email/code?email=wqao1023@qq.com"
+     */
     it("CURD", async () => {
-        const $suev = new StreamUserEmailView()
-        const info = await $suev.login({ code: "255097", email: "wqao1023@qq.com" })
-        // $request.interceptors.request.use((config) => {
-        //     config.headers.Authorization = info.authorization
-        //     return config
-        // })
+        const $suev = new ViewStreamUserEmail()
+        const info = await $suev.login({ code: "6ca444", email: "wqao1023@qq.com" })
+        $request.setDefaultHeaders('Authorization', info.authorization)
 
-        // const $suv = new StreamUserView()
-        // await $suv.initialUserInfo()
+        const $suv = new ViewStreamUser()
+        await $suv.initialUserInfo()
+        console.log($suv.userInfo)
         // expect($suv.userInfo?.uuid32?.length).toBeGreaterThan(0)
     }, 1000 * 60);
 });

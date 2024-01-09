@@ -7,7 +7,6 @@ import { TransformerSmallInt, TransformerInteger, TransformerBigInteger } from "
 import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from "../lib/transfor.string";
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
-import { NotFunction } from "../lib/verify";
 
 @Entity({ name: RELATIONS_PG_TEST_TUPLE })
 export class PgTestTupleSchema implements PgTestTuple {

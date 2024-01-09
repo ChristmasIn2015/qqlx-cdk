@@ -7,7 +7,7 @@ import {
 import { UserEmailSchema } from "../schema-production/stream-user-email";
 import { $request } from "./utils";
 
-export class StreamUserEmailView {
+export class ViewStreamUserEmail {
 
     schema!: UserEmailSchema
 
@@ -22,15 +22,13 @@ export class StreamUserEmailView {
         this.schema = new UserEmailSchema()
     }
 
-    async postCode (dto: getStreamUserEmailCodeDto): Promise<getStreamUserEmailCodeRes> {
-        await $request.post(PATH_STREAM_USER_EMAIL_CODE, { dto });
+    async postEmailCode (dto: getStreamUserEmailCodeDto): Promise<getStreamUserEmailCodeRes> {
+        await $request.post(PATH_STREAM_USER_EMAIL_CODE, dto);
         return null
     }
 
     async login (dto: postStreamUserEmailDto): Promise<postStreamUserEmailRes> {
-        const info: postStreamUserEmailRes = await $request.post(PATH_STREAM_USER_EMAIL, { dto });
-
-        console.log(info)
+        const info = await $request.post<postStreamUserEmailRes>(PATH_STREAM_USER_EMAIL, dto);
         return info
     }
 }

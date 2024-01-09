@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, BeforeInsert, JoinColumn } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, INTEGER_PG, UserEmail, VARCHAR255_PG, StreamUser } from "qqlx-core";
 import { RELATIONS_STREAM_USER, RELATIONS_STREAM_USER_WECHAT, RELATIONS_STREAM_USER_TELECOM, RELATIONS_STREAM_USER_EMAIL } from "qqlx-core";
@@ -22,6 +22,7 @@ export class UserEmailSchema implements UserEmail {
     // =============================
 
     @ManyToOne(s => StreamUserSchema, s => s.joinWeChatList)
+    @JoinColumn({ name: 'uuid32' })
     joinStreamUser?: StreamUser
 
     // =============================

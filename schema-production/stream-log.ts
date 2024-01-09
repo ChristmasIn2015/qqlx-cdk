@@ -8,8 +8,10 @@ import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from 
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 
+import { PgBase } from "../lib/schema";
+
 @Entity({ name: RELATIONS_STREAM_LOG })
-export class StreamLogSchema implements StreamLog {
+export class StreamLogSchema extends PgBase implements StreamLog {
     @Column({
         transformer: new TransformerEnum(Object.values(ENUM_STREAM_LOG) as SMALLINT_PG[], ENUM_STREAM_LOG.WARN),
     })
@@ -29,34 +31,4 @@ export class StreamLogSchema implements StreamLog {
 
     @Column({ transformer: new TransformerSmallInt() })
     duration: SMALLINT_PG = -1;
-
-    // =============================
-    // ======= 必须有的字段 ========
-    // =============================
-
-    @PrimaryGeneratedColumn()
-    id!: number;
-
-    @Column({ transformer: new TransformerBoolean() })
-    isDisabled: boolean = false;
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeCreate: BIGINT_PG = Date.now().toString();
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeUpdate: BIGINT_PG = Date.now().toString();
-
-    // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction () {
-        for (const k in this) {
-            if (typeof this[k] === 'function') {
-                //@ts-ignore
-                this[k] = this[k].toString()
-            }
-        }
-    }
 }

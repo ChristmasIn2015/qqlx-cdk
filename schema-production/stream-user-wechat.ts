@@ -9,8 +9,10 @@ import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 import { StreamUserSchema } from "./stream-user";
 
+import { PgBase } from "../lib/schema";
+
 @Entity({ name: RELATIONS_STREAM_USER_WECHAT })
-export class UserWeChatSchema implements UserWeChat {
+export class UserWeChatSchema extends PgBase implements UserWeChat {
     @Column({ transformer: new TransformerVarchar50() })
     uuid32: VARCHAR50_PG = "";
 
@@ -27,37 +29,7 @@ export class UserWeChatSchema implements UserWeChat {
     // ============ JOIN ===========
     // =============================
 
-    @ManyToOne(s => StreamUserSchema, s => s.joinWeChatList)
-    @JoinColumn({ name: 'uuid32' })
-    joinStreamUser?: StreamUser
-
-    // =============================
-    // ======= 必须有的字段 ========
-    // =============================
-
-    @PrimaryGeneratedColumn()
-    id!: number;
-
-    @Column({ transformer: new TransformerBoolean() })
-    isDisabled: boolean = false;
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeCreate: BIGINT_PG = Date.now().toString();
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeUpdate: BIGINT_PG = Date.now().toString();
-
-    // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction () {
-        for (const k in this) {
-            if (typeof this[k] === "function") {
-                //@ts-ignore
-                this[k] = this[k].toString();
-            }
-        }
-    }
+    @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
+    @JoinColumn({ name: "joinStreamUser", referencedColumnName: "uuid32" })
+    joinStreamUser?: StreamUser;
 }

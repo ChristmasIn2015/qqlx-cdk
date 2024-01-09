@@ -12,28 +12,28 @@ import { UserEmailSchema } from "./stream-user-email";
 
 @Entity({ name: RELATIONS_STREAM_USER })
 export class StreamUserSchema implements StreamUser {
-    @Column({ transformer: new TransformerVarchar50() })
+    @PrimaryGeneratedColumn()
     uuid32: VARCHAR50_PG = "";
 
     // =============================
     // ============ JOIN ===========
     // =============================
 
-    @OneToMany(t => UserWeChatSchema, s => s.joinStreamUser)
+    @OneToMany((type) => UserWeChatSchema, (s) => s.joinStreamUser)
     joinWeChatList?: UserWeChat[];
 
-    @OneToMany(t => UserTelecomSchema, s => s.joinStreamUser)
+    @OneToMany((type) => UserTelecomSchema, (s) => s.joinStreamUser)
     joinTelecomList?: UserTelecom[];
 
-    @OneToMany(t => UserEmailSchema, s => s.joinStreamUser)
+    @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
     joinEmailList?: UserEmail[];
 
     // =============================
     // ======= 必须有的字段 ========
     // =============================
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+    @Column({ transformer: new TransformerInteger() })
+    id!: INTEGER_PG;
 
     @Column({ transformer: new TransformerBoolean() })
     isDisabled: boolean = false;
@@ -49,7 +49,7 @@ export class StreamUserSchema implements StreamUser {
     // =============================
 
     @BeforeInsert()
-    notFunction () {
+    notFunction() {
         for (const k in this) {
             if (typeof this[k] === "function") {
                 //@ts-ignore

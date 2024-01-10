@@ -14,13 +14,15 @@ describe("ViewStreamUser", () => {
         "CURD",
         async () => {
             const $suev = new ViewStreamUserEmail();
-            const info = await $suev.login({ code: "B2B394", email: "wqao1023@qq.com" });
+            const info = await $suev.login({ code: "E6C13D", email: "wqao1023@qq.com" });
             $request.setDefaultHeaders("Authorization", info.authorization);
 
             const $suv = new ViewStreamUser();
             await $suv.initialUserInfo();
-            console.log($suv.userInfo);
-            // expect($suv.userInfo?.uuid32?.length).toBeGreaterThan(0)
+            expect($suv.userInfo?.uuid32?.length).toBeGreaterThan(0)
+            expect($suv.userInfo?.joinWeChatList?.length).toBeGreaterThan(-1)
+            expect($suv.userInfo?.joinTelecomList?.length).toBeGreaterThan(-1)
+            expect($suv.userInfo?.joinEmailList?.length).toBeGreaterThan(-1)
         },
         1000 * 60
     );

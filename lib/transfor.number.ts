@@ -32,18 +32,10 @@ export class TransformerInteger {
 
 export class TransformerBigInteger {
     private trans (mess: any) {
-        let bigint = "-1";
-        try {
-            const _mess = BigInt(toString(mess))
-            if (_mess >= BigInt("9223372036854775807")) return BigInt("9223372036854775807").toString()
-            else if (_mess <= BigInt("-9223372036854775808")) return BigInt("-9223372036854775808").toString()
-            else return _mess.toString()
-
-        } catch (error) {
-            //
-        } finally {
-            return bigint;
-        }
+        const _mess = BigInt(toString(mess))
+        if (_mess >= BigInt("9223372036854775807")) return BigInt("9223372036854775807").toString()
+        else if (_mess <= BigInt("-9223372036854775808")) return BigInt("-9223372036854775808").toString()
+        else return _mess.toString()
     }
 
     to (mess: any): BIGINT_PG {

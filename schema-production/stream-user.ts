@@ -12,7 +12,7 @@ import { UserEmailSchema } from "./stream-user-email";
 
 @Entity({ name: RELATIONS_STREAM_USER })
 export class StreamUserSchema implements StreamUser {
-    @PrimaryColumn("uuid")
+    @PrimaryGeneratedColumn("uuid")
     uuid32!: VARCHAR50_PG;
 
     // =============================
@@ -32,7 +32,7 @@ export class StreamUserSchema implements StreamUser {
     // ======= 必须有的字段 ========
     // =============================
 
-    @Column({ transformer: new TransformerInteger() })
+    @Column()
     id!: INTEGER_PG;
 
     @Column({ transformer: new TransformerBoolean() })

@@ -33,7 +33,7 @@ export class StreamUserSchema implements StreamUser {
     // =============================
 
     @Column({ transformer: new TransformerInteger() })
-    id: INTEGER_PG = -1;
+    id!: INTEGER_PG;
 
     @Column({ transformer: new TransformerBoolean() })
     isDisabled: boolean = false;

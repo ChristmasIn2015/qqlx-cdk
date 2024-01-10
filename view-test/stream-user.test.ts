@@ -14,7 +14,7 @@ describe("ViewStreamUser", () => {
         "CURD",
         async () => {
             const $suev = new ViewStreamUserEmail();
-            const info = await $suev.login({ code: "8ED872", email: "wqao1023@qq.com" });
+            const info = await $suev.login({ code: "26E0B1", email: "wqao1023@qq.com" });
             $request.setDefaultHeaders("Authorization", info.authorization);
 
             const $suv = new ViewStreamUser();

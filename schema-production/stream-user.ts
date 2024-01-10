@@ -13,7 +13,7 @@ import { UserEmailSchema } from "./stream-user-email";
 @Entity({ name: RELATIONS_STREAM_USER })
 export class StreamUserSchema implements StreamUser {
     @PrimaryColumn("uuid")
-    uuid32: VARCHAR50_PG = "";
+    uuid32!: VARCHAR50_PG;
 
     // =============================
     // ============ JOIN ===========

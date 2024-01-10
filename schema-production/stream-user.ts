@@ -19,14 +19,14 @@ export class StreamUserSchema implements StreamUser {
     // ============ JOIN ===========
     // =============================
 
-    @OneToMany((type) => UserWeChatSchema, (s) => s.uuid32)
-    joinWeChatList?: UserWeChat[];
+    @OneToMany((type) => UserWeChatSchema, (s) => s.joinStreamUser)
+    joinWeChatList!: UserWeChatSchema[];
 
-    @OneToMany((type) => UserTelecomSchema, (s) => s.uuid32)
-    joinTelecomList?: UserTelecom[];
+    @OneToMany((type) => UserTelecomSchema, (s) => s.joinStreamUser)
+    joinTelecomList!: UserTelecomSchema[];
 
-    @OneToMany((type) => UserEmailSchema, (s) => s.uuid32)
-    joinEmailList?: UserEmail[];
+    @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
+    joinEmailList!: UserEmailSchema[];
 
     // =============================
     // ======= 必须有的字段 ========
@@ -49,7 +49,7 @@ export class StreamUserSchema implements StreamUser {
     // =============================
 
     @BeforeInsert()
-    notFunction() {
+    notFunction () {
         for (const k in this) {
             if (typeof this[k] === "function") {
                 //@ts-ignore

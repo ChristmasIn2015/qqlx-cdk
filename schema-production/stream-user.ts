@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, JoinColumn, OneToOne, BeforeInsert, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, BeforeUpdate, JoinColumn, OneToOne, BeforeInsert, OneToMany, PrimaryColumn } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, INTEGER_PG, StreamUser, UserWeChat, UserTelecom, UserEmail } from "qqlx-core";
 import { RELATIONS_STREAM_USER, RELATIONS_STREAM_USER_WECHAT, RELATIONS_STREAM_USER_TELECOM } from "qqlx-core";
@@ -12,7 +12,7 @@ import { UserEmailSchema } from "./stream-user-email";
 
 @Entity({ name: RELATIONS_STREAM_USER })
 export class StreamUserSchema implements StreamUser {
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn("uuid")
     uuid32: VARCHAR50_PG = "";
 
     // =============================
@@ -33,7 +33,7 @@ export class StreamUserSchema implements StreamUser {
     // =============================
 
     @Column({ transformer: new TransformerInteger() })
-    id!: INTEGER_PG;
+    id: INTEGER_PG = -1;
 
     @Column({ transformer: new TransformerBoolean() })
     isDisabled: boolean = false;

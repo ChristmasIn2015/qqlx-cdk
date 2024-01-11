@@ -1,6 +1,6 @@
 import {
     PATH_STREAM_USER_EMAIL, PATH_STREAM_USER_EMAIL_CODE,
-    UserInfo, getStreamUserEmailCodeDto, getStreamUserEmailCodeRes,
+    UserInfo, patchStreamUserEmailCodeDto, patchStreamUserEmailCodeRes,
     postStreamUserEmailDto, postStreamUserEmailRes,
 } from "qqlx-core";
 
@@ -22,7 +22,7 @@ export class ViewStreamUserEmail {
         this.schema = new UserEmailSchema()
     }
 
-    async postEmailCode (dto: getStreamUserEmailCodeDto): Promise<getStreamUserEmailCodeRes> {
+    async getStreamUserEmailCode (dto: patchStreamUserEmailCodeDto): Promise<patchStreamUserEmailCodeRes> {
         await $request.post(PATH_STREAM_USER_EMAIL_CODE, dto);
         return null
     }

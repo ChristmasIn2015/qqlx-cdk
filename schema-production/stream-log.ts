@@ -8,10 +8,11 @@ import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from 
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 
-import { PgBase } from "../lib/schema";
+import { IdBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_STREAM_LOG })
-export class StreamLogSchema extends PgBase implements StreamLog {
+export class StreamLogSchema extends IdBase implements StreamLog {
+
     @Column({
         transformer: new TransformerEnum(Object.values(ENUM_STREAM_LOG) as SMALLINT_PG[], ENUM_STREAM_LOG.WARN),
     })

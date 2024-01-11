@@ -8,10 +8,11 @@ import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from 
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { DraftNodeRelationSchema } from "./river-draft-node-relation";
 
-import { PgBase } from "../lib/schema";
+import { IdBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE })
-export class DraftNodeSchema extends PgBase implements DraftNode {
+export class DraftNodeSchema extends IdBase implements DraftNode {
+
     @Column({ transformer: new TransformerVarchar50() })
     uuid32: VARCHAR50_PG = "";
 

@@ -9,10 +9,11 @@ import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 import { StreamUserSchema } from "./stream-user";
 
-import { PgBase } from "../lib/schema";
+import { IdBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_STREAM_USER_WECHAT })
-export class UserWeChatSchema extends PgBase implements UserWeChat {
+export class UserWeChatSchema extends IdBase implements UserWeChat {
+
     @Column({ transformer: new TransformerVarchar50() })
     uuid32: VARCHAR50_PG = "";
 
@@ -24,12 +25,4 @@ export class UserWeChatSchema extends PgBase implements UserWeChat {
 
     @Column({ transformer: new TransformerVarchar255() })
     avator: VARCHAR255_PG = "";
-
-    // =============================
-    // ============ JOIN ===========
-    // =============================
-
-    @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
-    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
-    joinStreamUser!: StreamUserSchema;
 }

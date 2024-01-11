@@ -8,10 +8,11 @@ import { TransformerVarchar, TransformerVarchar50, TransformerVarchar255 } from 
 import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 
-import { PgBase } from "../lib/schema";
+import { IdBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
-export class DraftNodeRelationSchema extends PgBase implements DraftNodeRelation {
+export class DraftNodeRelationSchema extends IdBase implements DraftNodeRelation {
+
     @Column({ transformer: new TransformerVarchar50() })
     uuid32: VARCHAR50_PG = "";
 
@@ -30,5 +31,5 @@ export class DraftNodeRelationSchema extends PgBase implements DraftNodeRelation
     relation: ENUM_DRAFT_NODE_RELATION = ENUM_DRAFT_NODE_RELATION.NONE;
 
     @Column({ transformer: new TransformerInteger() })
-    order: SMALLINT_PG = -1;
+    sequence: SMALLINT_PG = 0;
 }

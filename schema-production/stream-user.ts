@@ -10,51 +10,8 @@ import { UserWeChatSchema } from "./stream-user-wechat";
 import { UserTelecomSchema } from "./stream-user-telecom";
 import { UserEmailSchema } from "./stream-user-email";
 
+import { UuidBase } from "../lib/schema";
+
 @Entity({ name: RELATIONS_STREAM_USER })
-export class StreamUserSchema implements StreamUser {
-    @PrimaryGeneratedColumn("uuid")
-    uuid32!: VARCHAR50_PG;
-
-    // =============================
-    // ============ JOIN ===========
-    // =============================
-
-    @OneToMany((type) => UserWeChatSchema, (s) => s.joinStreamUser)
-    joinWeChatList!: UserWeChatSchema[];
-
-    @OneToMany((type) => UserTelecomSchema, (s) => s.joinStreamUser)
-    joinTelecomList!: UserTelecomSchema[];
-
-    @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
-    joinEmailList!: UserEmailSchema[];
-
-    // =============================
-    // ======= 必须有的字段 ========
-    // =============================
-
-    @Column()
-    id!: INTEGER_PG;
-
-    @Column({ transformer: new TransformerBoolean() })
-    isDisabled: boolean = false;
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeCreate: BIGINT_PG = Date.now().toString();
-
-    @Column({ transformer: new TransformerBigInteger() })
-    timeUpdate: BIGINT_PG = Date.now().toString();
-
-    // =============================
-    // ==== 插入之前不能是函数 ====
-    // =============================
-
-    @BeforeInsert()
-    notFunction () {
-        for (const k in this) {
-            if (typeof this[k] === "function") {
-                //@ts-ignore
-                this[k] = this[k].toString();
-            }
-        }
-    }
+export class StreamUserSchema extends UuidBase implements StreamUser {
 }

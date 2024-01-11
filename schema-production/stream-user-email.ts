@@ -19,4 +19,12 @@ export class UserEmailSchema extends IdBase implements UserEmail {
 
     @Column({ transformer: new TransformerVarchar50() })
     email: VARCHAR50_PG = "";
+
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
+    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
+    joinStreamUser!: StreamUserSchema;
 }

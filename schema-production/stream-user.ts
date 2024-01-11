@@ -14,4 +14,16 @@ import { UuidBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_STREAM_USER })
 export class StreamUserSchema extends UuidBase implements StreamUser {
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @OneToMany((type) => UserWeChatSchema, (s) => s.joinStreamUser)
+    joinWeChatList!: UserWeChatSchema[];
+
+    @OneToMany((type) => UserTelecomSchema, (s) => s.joinStreamUser)
+    joinTelecomList!: UserTelecomSchema[];
+
+    @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
+    joinEmailList!: UserEmailSchema[];
 }

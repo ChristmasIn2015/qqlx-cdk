@@ -14,11 +14,12 @@ describe("ViewStreamUser", () => {
         "CURD",
         async () => {
             const $suev = new ViewStreamUserEmail();
-            const info = await $suev.login({ code: "652856" });
+            const info = await $suev.login({ code: "6DB226" });
             $request.setDefaultHeaders("Authorization", info.authorization);
 
             const $suv = new ViewStreamUser();
             await $suv.initialUserInfo();
+            console.log($suv.userInfo)
             expect($suv.userInfo?.uuid32?.length).toBeGreaterThan(0)
             expect($suv.userInfo?.joinWeChatList?.length).toBeGreaterThan(-1)
             expect($suv.userInfo?.joinTelecomList?.length).toBeGreaterThan(-1)

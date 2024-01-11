@@ -19,4 +19,12 @@ export class UserTelecomSchema extends IdBase implements UserTelecom {
 
     @Column({ transformer: new TransformerVarchar50() })
     phone: VARCHAR50_PG = "";
+
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
+    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
+    joinStreamUser!: StreamUserSchema;
 }

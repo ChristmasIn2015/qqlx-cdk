@@ -25,4 +25,12 @@ export class UserWeChatSchema extends IdBase implements UserWeChat {
 
     @Column({ transformer: new TransformerVarchar255() })
     avator: VARCHAR255_PG = "";
+
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @ManyToOne((type) => StreamUserSchema, (s) => s.joinWeChatList)
+    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
+    joinStreamUser!: StreamUserSchema;
 }

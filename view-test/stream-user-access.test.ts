@@ -6,7 +6,7 @@ declare global {
     var Authorization: string;
 }
 
-describe("ViewStreamUser", () => {
+describe("ViewStreamUserAccess", () => {
     /** 登录之前记得获取一下邮箱验证码
      * @postEmailCode curl -X GET "http://localhost:8003/stream/user/email/code?email=wqao1023@qq.com"
      */

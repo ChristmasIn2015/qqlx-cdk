@@ -31,4 +31,12 @@ export class StreamUserAccessGroupSchema extends IdBase implements StreamUserAcc
 
     @Column({ transformer: new TransformerSmallInt() })
     sequence: SMALLINT_PG = 0;
+
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @ManyToOne((type) => StreamUserSchema)
+    @JoinColumn({ name: "uuid32", referencedColumnName: "uuid32" })
+    joinOwner!: StreamUserSchema;
 }

@@ -22,7 +22,7 @@ export class ViewStreamUserEmail {
         this.schema = new UserEmailSchema()
     }
 
-    async getStreamUserEmailCode (dto: patchStreamUserEmailCodeDto): Promise<patchStreamUserEmailCodeRes> {
+    async patchCode (dto: patchStreamUserEmailCodeDto): Promise<patchStreamUserEmailCodeRes> {
         await $request.post(PATH_STREAM_USER_EMAIL_CODE, dto);
         return null
     }

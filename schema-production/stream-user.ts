@@ -10,6 +10,8 @@ import { UserWeChatSchema } from "./stream-user-wechat";
 import { UserTelecomSchema } from "./stream-user-telecom";
 import { UserEmailSchema } from "./stream-user-email";
 
+import { StreamUserAccessGroupSchema } from "./stream-user-access-group";
+
 import { UuidBase } from "../lib/schema";
 
 @Entity({ name: RELATIONS_STREAM_USER })
@@ -26,4 +28,11 @@ export class StreamUserSchema extends UuidBase implements StreamUser {
 
     @OneToMany((type) => UserEmailSchema, (s) => s.joinStreamUser)
     joinEmailList!: UserEmailSchema[];
+
+    // =============================
+    // ======= Shadow JOIN =========
+    // =============================
+
+    @OneToMany((type) => StreamUserAccessGroupSchema, s => s.joinOwner)
+    joinAccessGroupList!: StreamUserAccessGroupSchema[];
 }

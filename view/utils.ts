@@ -5,7 +5,7 @@ import { getResponseData } from "../lib/response"
 import { isEnvBrower } from "../lib/verify"
 
 class CommonRequest {
-    private HOST = 'http://127.0.0.1:8003'
+    private HOST = 'http://127.0.0.1'
     private defaultHeaders: Record<string, string> = {}
 
     constructor() { }

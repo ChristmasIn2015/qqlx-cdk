@@ -14,6 +14,9 @@ describe("ViewStreamUser", () => {
         "CURD",
         async () => {
             const $viewGroup = new ViewStreamUserAccessGroup();
+
+            $viewGroup.initialSchema()
+            await $viewGroup.post()
             await $viewGroup.get();
             console.log($viewGroup.list)
         },

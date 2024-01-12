@@ -36,6 +36,6 @@ export class ViewStreamUserAccessGroup {
 
     async post () {
         const dto: postStreamAccessGroupDto = { schema: this.schema }
-        const res: postStreamAccessGroupRes = await $request.post(PATH_STREAM_USER_ACCESS_GROUP, { dto });
+        const res: postStreamAccessGroupRes = await $request.post(PATH_STREAM_USER_ACCESS_GROUP, dto);
     }
 }

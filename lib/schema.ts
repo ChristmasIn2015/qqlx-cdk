@@ -48,7 +48,7 @@ export class UuidBase implements PgBaseSchema {
     @PrimaryGeneratedColumn("uuid")
     uuid32!: VARCHAR50_PG;
 
-    @Column()
+    @Column({ select: false })
     id!: INTEGER_PG;
 
     @Column({ transformer: new TransformerBoolean() })

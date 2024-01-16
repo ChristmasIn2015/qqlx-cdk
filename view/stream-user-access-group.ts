@@ -42,11 +42,13 @@ export class ViewStreamUserAccessGroup {
     async post () {
         const dto: postStreamAccessGroupDto = { schema: this.schema }
         const res: postStreamAccessGroupRes = await $request.post(PATH_STREAM_USER_ACCESS_GROUP, dto);
+        this.initialSchema()
     }
 
     async put () {
         const dto: putStreamAccessGroupDto = { entity: this.schema }
         const res: putStreamAccessGroupRes = await $request.put(PATH_STREAM_USER_ACCESS_GROUP, dto);
+        this.initialSchema()
     }
 
     async delete (id: INTEGER_PG) {

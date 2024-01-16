@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn, OneToOne } from "typeorm";
 
 import type { VARCHAR50_PG, BIGINT_PG, VARCHAR_PG, DraftNodeRelation, SMALLINT_PG, INTEGER_PG, FOREIGN_ID, DraftNode } from "qqlx-core";
 import { RELATIONS_RIVER_DRAFT_NODE_RELATION, ENUM_DRAFT_NODE_RELATION } from "qqlx-core";
@@ -9,6 +9,7 @@ import { TransformerBoolean } from "../lib/transfor.boolean";
 import { TransformerEnum } from "../lib/transfor.enum";
 
 import { IdBase } from "../lib/schema";
+import { DraftNodeSchema } from "./river-draft-node";
 
 @Entity({ name: RELATIONS_RIVER_DRAFT_NODE_RELATION })
 export class DraftNodeRelationSchema extends IdBase implements DraftNodeRelation {
@@ -32,4 +33,16 @@ export class DraftNodeRelationSchema extends IdBase implements DraftNodeRelation
 
     @Column({ transformer: new TransformerInteger() })
     sequence: SMALLINT_PG = 0;
+
+    // =============================
+    // ============ JOIN ===========
+    // =============================
+
+    @OneToOne(() => DraftNodeSchema, e => e.joinParentRelation)
+    @JoinColumn()
+    joinParentNode?: DraftNode;
+
+    @OneToOne(() => DraftNodeSchema, e => e.joinCurrentRelation)
+    @JoinColumn()
+    joinCurrentNode?: DraftNode;
 }

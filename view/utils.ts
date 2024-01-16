@@ -5,15 +5,15 @@ import { getResponseData } from "../lib/response"
 import { isEnvBrower } from "../lib/verify"
 
 class CommonRequest {
-    private HOST = 'http://127.0.0.1'
-    private defaultHeaders: Record<string, string> = {}
+    HOST = 'http://127.0.0.1'
+    defaultHeaders: Record<string, string> = {}
 
     constructor() { }
 
     async get<T> (path: string, query?: Record<string, any>) {
         const _query = new URLSearchParams(query)
         const response = await fetch(`${this.HOST}${path}?${_query.toString()}`, {
-            headers: this.getDefaultHeaders(),
+            headers: { ...this.defaultHeaders },
         })
         const info: Response<T> = await response.json()
         return getResponseData<T>(info)
@@ -38,8 +38,8 @@ class CommonRequest {
     private async getDefaultPostConfig<T> (method: string, path: string, body?: Record<string, any>): Promise<T> {
         const response = await fetch(`${this.HOST}${path}`, {
             method,
-            headers: { ...this.getDefaultHeaders(), 'Content-Type': 'application/json' },
-            body: body ? JSON.stringify(body) : null
+            headers: { ...this.defaultHeaders, 'Content-Type': 'application/json' },
+            body: body ? JSON.stringify(body) : null,
         })
         const info: Response<T> = await response.json()
 
@@ -48,16 +48,6 @@ class CommonRequest {
 
     setDefaultHeaders (key: string, value: string) {
         this.defaultHeaders[key] = value
-    }
-
-    private getDefaultHeaders () {
-        const headers = this.defaultHeaders
-        if (headers['Authorization']) return headers
-        else return {
-            'Authorization': isEnvBrower()
-                ? localStorage['qqlx-token']
-                : global['Authorization']
-        }
     }
 }
 

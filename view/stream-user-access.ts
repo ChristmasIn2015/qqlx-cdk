@@ -35,7 +35,7 @@ export class ViewStreamUserAccess {
 
     async get (gid: INTEGER_PG) {
         const dto: getStreamAccessDto = { gid: getConditionMatchInteger('gid', gid) }
-        const res: getStreamAccessRes = await $request.post(`${PATH_STREAM_USER_ACCESS}/get`);
+        const res: getStreamAccessRes = await $request.post(`${PATH_STREAM_USER_ACCESS}/get`, dto);
         this.list = res
         return []
     }
